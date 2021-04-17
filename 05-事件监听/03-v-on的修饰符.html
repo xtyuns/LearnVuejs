@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2>事件冒泡</h2>
+    <div class="box" @click="divClick">
+        <button @click="btnClick">按钮</button>
+    </div>
+    <h2>阻止冒泡</h2>
+    <div class="box" @click="divClick">
+        <button @click.stop="btnClick">按钮</button>
+    </div>
+
+    <hr>
+    <h2>阻止默认行为</h2>
+    <form action="https://www.baidu.com/">
+        <!-- 也可以写作: <form @submit.prevent> -->
+        <input type="submit" @click.prevent="btnClick">
+    </form>
+
+    <hr>
+    <h2>按键监听</h2>
+    <input type="text" @keyup="keyUp">
+    <h2>监听指定按键</h2>
+    <input type="text" @keyup.enter="keyUp">
+
+    <hr>
+    <h2>事件只触发一次</h2>
+    <button @click.once="btnClick">按钮</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 1. .stop 修饰符(调用 event.stopPropagation())
+    //     @click.stop: 阻止点击事件冒泡
+
+    // 2. .prevent 修饰符(调用 event.preventDefault())
+    //     @click.prevent: 阻止点击事件的默认行为
+    //     @submit.prevent: 阻止表单提交事件的默认行为
+
+    // 3-1. @keyup: 监听所有按键的弹起事件
+    // 3-2. @keyup.enter: 监听指定按键的弹起事件(enter 即: 回车键)
+
+    // 4. .once 修饰符: 事件仅能触发一次
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World'
+        },
+        methods: {
+            divClick() {
+                console.log("div click");
+            },
+            btnClick() {
+                console.log("btn click");
+            },
+            keyUp() {
+                console.log("keyUp");
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <ul>
+        <li v-for="item in arr">{{item}}</li>
+    </ul>
+
+    <button @click="idx">通过索引直接修改</button>
+    <button @click="spl">通过 splice() 方法修改</button>
+    <button @click="vset">通过 Vue.set() 进行修改</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 1. 通过索引直接修改数组数据不会触发 vue 的更新检测事件(数据会变化, 但是视图不更新)
+    // 2. 通过数组对象的 splice() 方法可以触发更新检测事件
+    // 3. 通过 Vue 的 Vue.set() 方法也可以触发更新检测事件
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            arr: ['a', 'b', 'c', 'd']
+        },
+        methods: {
+            idx() {
+                this.arr[0] = 'index[]'
+            },
+            spl() {
+                this.arr.splice(0, 1, 'splice()')
+            },
+            vset() {
+                Vue.set(this.arr, 0, 'Vue.set()')
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

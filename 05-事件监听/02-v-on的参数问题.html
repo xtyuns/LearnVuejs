@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <button @click="func()">func()</button>
+    <button @click="func">func</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // @click="func()" 如果没有传递参数, 那么参数为 undefined
+    // @click="func" 如果没有传递参数, 那么第一个参数默认为 $event(即: @click="func($event)")
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World'
+        },
+        methods: {
+            func(param, p2) {
+                console.log("params: ", param, p2);
+            }
+        }
+    });
+</script>
+</body>
+</html>

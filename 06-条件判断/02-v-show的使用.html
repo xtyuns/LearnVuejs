@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2 id="if" v-if="isShow">{{message}}</h2>
+    <h2 id="show" v-show="isShow">{{message}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // v-if 和 v-show 的对比:
+    //     v-if: 当 v-if 的属性为 false 时, 该标签根本不会存在于 dom 之中, 因此通过检查元素也看不到对应的 html
+    //     v-show: 当 v-show 的属性为 false 时, 其实是向该标签添加了一个 display: none 的 style, 该标签还是存在于 dom 之中的
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            isShow: true
+        }
+    });
+</script>
+</body>
+</html>

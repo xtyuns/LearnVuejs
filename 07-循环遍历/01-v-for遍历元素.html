@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>数组遍历</h2>
+    <!-- 数组值遍历 -->
+    <ul>
+        <li v-for="item in arr">{{item}}</li>
+    </ul>
+    <!-- 获取数组元素索引 -->
+    <ul>
+        <li v-for="(item, index) in arr">{{index}}-{{item}}</li>
+    </ul>
+
+    <h2>对象遍历</h2>
+    <!-- 对象值遍历 -->
+    <ul>
+        <li v-for="item in data">{{item}}</li>
+    </ul>
+    <!-- 获取对象属性的 key -->
+    <ul>
+        <li v-for="(item, key) in data">{{key}}: {{item}}</li>
+    </ul>
+    <!-- 获取对象属性的 key 和 index -->
+    <ul>
+        <li v-for="(item, key, index) in data">[{{index}}]{{key}}: {{item}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            arr: ['a', 'b', 'c'],
+            data: {
+                name: 'Kobe',
+                age: 28
+            }
+        }
+    });
+</script>
+</body>
+</html>
