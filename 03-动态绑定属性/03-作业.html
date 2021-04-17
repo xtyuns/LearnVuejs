@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    active {
+        color: red;
+    }
+</style>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <ul>
+        <li v-for="(item, index) in movies" :class="{active: isActive(index)}" @click="active(index)">{{item}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 将点击的列表元素添加 active 效果
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            movies: ['唐人街探案', '你好, 李焕英'],
+            index: -1
+        },
+        methods: {
+            active: function (index) {
+                this.index = index
+                console.log("click me:" + this.index)
+            },
+            isActive: function (index) {
+                return index === this.index
+                console.log("isActive:" + index)
+            }
+        }
+    });
+</script>
+</body>
+</html>

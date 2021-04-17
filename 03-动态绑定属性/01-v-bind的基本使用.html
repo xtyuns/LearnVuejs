@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <!-- (错误写法)Mustache 语法不可以用于标签属性 -->
+    <img src="{{img}}">
+    <!-- v-bind 用于绑定标签属性 -->
+    <img v-bind:src="img">
+    <!-- v-bind 的语法糖写法 -->
+    <img :src="img">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // v-bind: 给 html 标签的属性绑定一个变量, 如: v-bind:title="message"
+    // 简写: v-bind:title="message" => :title="message"
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            img: 'https://game.gtimg.cn/images/lol/act/img/skin/big222004.jpg'
+        }
+    });
+</script>
+</body>
+</html>

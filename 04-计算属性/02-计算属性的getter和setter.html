@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName2}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 计算属性的本质
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            firstName: 'Kobe',
+            lastName: 'Bryant'
+        },
+        computed: {
+            // fullName 本质上就是一个属性, 其内容是一个对象(下面的写法等同于 01-计算属性的基本使用, 即: 默认传递 get() 函数)
+            fullName: {
+                get: function () {
+                    return this.firstName + ' ' + this.lastName
+                }
+            },
+            fullName2: {
+                get: function () {
+                    return this.firstName + ' ' + this.lastName
+                },
+                // 计算属性也可以设置 setter 方法
+                set: function (newValue) {
+                    const split = newValue.split(' ');
+                    this.firstName = split[0];
+                    this.lastName = split[1];
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

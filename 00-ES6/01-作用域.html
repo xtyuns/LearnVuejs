@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+
+
+<script>
+  // ES5 中的 var 关键字所定义的变量只有全局作用域和函数级作用域
+  var es5_btns = document.getElementsByTagName("button")
+  for (var i = 0; i < es5_btns.length; i++) {
+    es5_btns[i].addEventListener("click", function () {
+      // 点击事件是在 for 循环之后执行的, 此时 i = 5
+      console.log("[ES5]点击了按钮" + i)
+    })
+  }
+
+  // ES5 解决方法: 闭包
+  for (var i = 0; i < es5_btns.length; i++) {
+    (function (index) {
+      es5_btns[index].addEventListener("click", function () {
+        console.log("[ES5闭包]点击了按钮" + index)
+      })
+    })(i)
+  }
+
+  // ES6 中的 let、const 关键字是块级作用域
+  const es6_btns = document.getElementsByTagName('button')
+  for (let j = 0; j < es6_btns.length; j++) {
+    es5_btns[j].addEventListener('click', function () {
+      console.log("[ES6]点击了按钮" + j)
+    })
+  }
+</script>
+</body>
+</html>

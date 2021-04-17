@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>当前计数: {{counter}}</h2>
+    <button v-on:click="add">+</button>
+    <button @click="sub">-</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  // v-on:click 指令的简写: @click, 即: v-on => @
+  // data 属性相当于定义成员属性
+  // methods 属性相当于定义成员方法
+  const app = new Vue({
+    el: '#app',
+    data: {
+        counter: 0,
+    },
+    methods: {
+        add: function () {
+            // counter 属性属于 app 对象
+            this.counter++;
+            console.log("调用了 add() 方法");
+        },
+        sub: function () {
+            this.counter--;
+            console.log("调用了 sub() 方法");
+        }
+    }
+  });
+</script>
+</body>
+</html>

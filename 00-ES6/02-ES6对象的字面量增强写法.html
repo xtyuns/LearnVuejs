@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let name = 'Wh1t3Zz';
+    let age = 28;
+    // 1. 对象的字面量增强写法
+    let obj1 = {
+        name,
+        age
+    }
+    /* 等同于(ES5):
+    var obj1 = {
+        name: name,
+        age: age
+    } */
+    console.log(obj1);
+
+
+
+    // 2. 函数的增强写法
+    const obj2 = {
+        run () {
+            console.log("I'm running");
+        }
+    }
+    /* 等同于(ES5):
+    var obj2 = {
+        run: function () {
+            console.log("I'm running");
+        }
+    } */
+</script>
+</body>
+</html>

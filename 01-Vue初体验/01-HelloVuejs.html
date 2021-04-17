@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">{{message}}</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  // 编程范式: 声明式开发(传统为: 命令式开发)
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好, 卢本伟!'
+    }
+  });
+</script>
+</body>
+</html>

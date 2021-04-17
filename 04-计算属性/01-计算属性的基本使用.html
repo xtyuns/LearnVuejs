@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{message}}</h2>
+  <h2>{{firstName + ' ' + lastName}}</h2>
+  <h2>{{fullName}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  // 计算属性: 将一个函数当作属性使用
+  // computed 和 methods 的区别:
+  //   当计算属性中的数据没有变化时, 计算属性在第一次调用后就会将计算结果进行缓存, 再次调用计算该计算属性时会直接取缓存结果
+  //   而使用 methods 是没有缓存的, 所以每次调用都会进行函数执行, 因此使用函数的效率没有计算属性高
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello, World',
+      firstName: 'Kobe',
+      lastName: 'Bryant'
+    },
+    computed: {
+      // ES6 语法: 在增强对象字面量中创建方法(省略 function 关键字)
+      fullName() {
+        return this.firstName + ' ' + this.lastName
+      }
+    }
+  });
+</script>
+</body>
+</html>
