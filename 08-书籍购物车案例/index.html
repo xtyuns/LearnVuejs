@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, td {
+            border: 1px solid #000;
+            border-spacing: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div v-if="books.length">
+        <table>
+            <thead>
+            <tr>
+                <td></td>
+                <td>书籍名称</td>
+                <td>出版日期</td>
+                <td>价格</td>
+                <td>购买数量</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(book, index) in books" :key="book.id">
+                <td>{{index + 1}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.date}}</td>
+                <!-- 通过过滤器来显示价格 -->
+                <td>{{book.price | formatPrice}}</td>
+                <td>
+                    <!-- 当数量为 1 时, 禁止点击 -->
+                    <button @click="decrement(index)" :disabled="book.count <= 1">-</button>
+                    {{book.count}}
+                    <button @click="increment(index)">+</button>
+                </td>
+                <td>
+                    <button @click="removeBook(index)">移除</button>
+                </td>
+            </tr>
+            <tr>
+                <!-- 通过计算属性来获取总价格 -->
+                <td colspan="100%">总价: {{totalPrice | formatPrice}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div v-else>
+        <p>购物车暂时为空</p>
+    </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {
+                    name: '算法导论',
+                    date: '2006-9',
+                    price: 85.00,
+                    count: 1
+                }, {
+                    name: 'UNIX编程艺术',
+                    date: '2006-2',
+                    price: 59.00,
+                    count: 1
+                }, {
+                    name: '编程珠玑',
+                    date: '2008-10',
+                    price: 39.00,
+                    count: 1
+                }, {
+                    name: '代码大全',
+                    date: '2006-3',
+                    price: 128.00,
+                    count: 1
+                }
+            ]
+        },
+        computed: {
+            totalPrice() {
+                // 这里的 reduce() 函数需要传递第二个参数, 否则返回值会被认为是一个 book 对象
+                return this.books.reduce(((t, b) => t + b.price * b.count), 0);
+            }
+        },
+        methods: {
+            increment(index) {
+                this.books[index].count++;
+            },
+            decrement(index) {
+                this.books[index].count--;
+            },
+            removeBook(index) {
+                this.books.splice(index, 1);
+            }
+        },
+        filters: {
+            formatPrice(price) {
+                return '￥' + price.toFixed(2);
+            }
+        }
+    });
+</script>
+</body>
+</html>

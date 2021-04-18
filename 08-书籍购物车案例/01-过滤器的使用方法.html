@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <h2>{{price | formatPrice}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 过滤器默认向方法的第一个参数传递上一个表达式的结果
+    // 官方文档: https://cn.vuejs.org/v2/guide/filters.html
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            price: 80.010
+        },
+        filters: {
+            formatPrice(price) {
+                return "￥" + price.toFixed(2)
+            }
+        }
+    });
+</script>
+</body>
+</html>
