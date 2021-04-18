@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- 多选框没有 value 属性, 此时值为 boolean 数据类型 -->
+    <input type="checkbox" v-model="isAgree" name="agree"> 同意用户协议
+    <button :disabled="!isAgree">下一步</button>
+    <h2>isAgree: {{isAgree}}</h2>
+
+    <hr>
+
+    <label v-for="item in originFruits">
+        <input type="checkbox" name="fruits" :value="item" v-model="fruits">{{item}}
+    </label>
+    <h2>您选择的水果有: {{fruits}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // v-model 可以实现 input、textarea、select 等表单元素的数据绑定
+    const app = new Vue({
+        el: '#app',
+        data: {
+            isAgree: false,
+            fruits: [],
+            originFruits: ['苹果', '香蕉', '梨', '葡萄']
+        }
+    });
+</script>
+</body>
+</html>
