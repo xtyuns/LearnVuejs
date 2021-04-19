@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    [id^='app'] {
+        border: 1px solid #000;
+    }
+</style>
+<body>
+<div id="app">
+    <!-- cpn 是全局组件, 所以 app 实例中可以正常渲染 -->
+    <cpn></cpn>
+    <!-- cpn1 是 app 实例下的局部组件, 所以在 app 实例中可以正常渲染 -->
+    <cpn1></cpn1>
+</div>
+
+<div id="app2">
+    <!-- cpn 是全局组件, 所以 app2 实例中可以正常渲染 -->
+    <cpn></cpn>
+    <!-- cpn1 是一个属于 app 实例的局部组件, 所以它无法在 app2 实例中被渲染-->
+    <cpn1></cpn1>
+    <!-- 在 app2 中通过直接定义的局部组件 -->
+    <cpn2></cpn2>
+    <!-- 在 app2 中通过模板标签定义的局部组件 -->
+    <cpn3></cpn3>
+</div>
+
+<template id="cpn3">
+    <div>
+        <h2>我是组件标题三</h2>
+        <p>组件内容</p>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    const cpnC = Vue.extend({
+        template: `
+        <div>
+            <h2>我是组件标题</h2>
+            <p>组件内容</p>
+        </div>
+        `
+    });
+
+    // 定义一个全局组件
+    Vue.component('cpn', cpnC);
+
+    // 在 Vue 实例的属性中定义的组件就是局部组件, 不能像全局组件一样跨实例使用(即: cpn1 只能在 app 这个 Vue 实例中使用)
+    const cpn1C = Vue.extend({
+        template: `
+        <div>
+            <h2>我是组件标题一</h2>
+            <p>组件内容</p>
+        </div>
+        `
+    });
+    const app = new Vue({
+        el: '#app',
+        components: {
+            cpn1: cpn1C
+        }
+    });
+
+    // 局部组件也可以直接在内部定义, 或通过模板进行定义
+    const app2 = new Vue({
+        el: '#app2',
+        components: {
+            cpn2: {
+                template: `
+                <div>
+                    <h2>我是组件标题二</h2>
+                    <p>组件内容</p>
+                </div>
+                `
+            },
+            cpn3: {
+                template: '#cpn3'
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn></cpn>
+</div>
+
+<!-- 这个cpn 标签不在 Vue 实例中, 因此交给 html 进行解析, 而非 Vue 进行解析 -->
+<cpn></cpn>
+
+<div id="app2">
+    <cpn2></cpn2>
+    <!-- 因为cpn 是全局组件, 所以 app2 中也可以使用-->
+    <cpn></cpn>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 第一步: 定义组件, 组件必须要有一个根标签进行包裹(相当于编写一个 Java 类)
+    const cpnC = Vue.extend({
+        template: `
+        <div>
+            <h2>我是组件标题</h2>
+            <p>组件内容</p>
+        </div>
+        `
+    });
+
+    // 第二步: 全局声明一个组件, 组件名为 cpn, 组件为 cpnC(相当于声明一个全局变量)
+    Vue.component('cpn', cpnC);
+
+    // 第三步: 在 Vue 实例中使用字定义组件(html 中只有 app 中的 cpn 组件可以被识别, app 外的 cpn 标签 Vue 不会进行解析)
+    const app = new Vue({
+        el: '#app'
+    });
+</script>
+<script>
+    // 前两步可以简写为如下格式:
+    Vue.component('cpn2', {
+        template: `
+        <div>
+            <h2>我是组件标题二</h2>
+            <p>组件内容</p>
+        </div>
+        `
+    });
+
+    const app2 = new Vue({
+        el: '#app2'
+    });
+</script>
+</body>
+</html>

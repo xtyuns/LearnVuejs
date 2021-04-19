@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <cpn></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>我是组件标题</h2>
+        <p>component: {{component}}</p>
+        <p>message: {{message}}</p>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    // 子组件只能直接访问自己定义的数据, 而无法直接访问父组件中的数据(如: message)
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World'
+        },
+        components: {
+            cpn: {
+                template: '#cpn',
+                // 关于 date 属性为什么是一个函数将在下一节中详细说明
+                data() {
+                    return {
+                        component: "I'm a component"
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

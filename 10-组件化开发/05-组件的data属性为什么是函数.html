@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <counter1></counter1>
+    <counter1></counter1>
+</div>
+
+<hr>
+
+<div id="app2">
+    <counter2></counter2>
+    <counter2></counter2>
+</div>
+
+<template id="counter">
+    <div>
+        <p>count: {{count}}</p>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    // data 定义为函数的目的就是使每个组件都有自己的数据空间, 以防止多个组件之间的数据混乱使用
+    // 对比本案例中的两个 Vue 实例 app 和 app2 的计数器即可理解独立数据空间的作用
+    // 其实就相当于 Java 中的静态属性和实例属性
+    const data = {
+        count: 0
+    }
+    const app = new Vue({
+        el: '#app',
+        components: {
+            counter1: {
+                template: '#counter',
+                data() {
+                    return data
+                },
+                methods: {
+                    increment() {
+                        this.count++
+                    },
+                    decrement() {
+                        this.count--
+                    }
+                }
+            }
+        }
+    });
+
+    const app2 = new Vue({
+        el: '#app2',
+        components: {
+            counter2: {
+                template: '#counter',
+                data() {
+                    return {
+                        count: 0
+                    }
+                },
+                methods: {
+                    increment() {
+                        this.count++
+                    },
+                    decrement() {
+                        this.count--
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

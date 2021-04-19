@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <cpn :msg="message"></cpn>
+</div>
+
+<div id="app2">
+    <h2>{{message}}</h2>
+    <cpn :msg="message"></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>我是组件标题</h2>
+        <p>component: {{component}}</p>
+        <p>message: {{msg}}</p>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    // 通过向子组件的 properties 绑定数据来进行数据传递
+    // props 官方文档: https://cn.vuejs.org/v2/guide/components-props.html
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+        },
+        components: {
+            cpn: {
+                template: '#cpn',
+                // 关于 date 属性为什么是一个函数将在下一节中详细说明
+                data() {
+                    return {
+                        component: "I'm a component"
+                    }
+                },
+                props: ['msg']
+            }
+        }
+    });
+
+    // props 属性的高级使用
+    const app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'Hello, World',
+        },
+        components: {
+            cpn: {
+                template: '#cpn',
+                // 关于 date 属性为什么是一个函数将在下一节中详细说明
+                data() {
+                    return {
+                        component: "I'm a component"
+                    }
+                },
+                props: {
+                    // 为 prop 指定类型
+                    msg: String,
+                    // 多个可能的类型
+                    propB: [String, Number],
+                    // 自定义验证函数
+                    propC: {
+                        validate: function (value) {
+                            // 这个值必须匹配下列字符串中的一个
+                            return ['success', 'warning', 'danger'].indexOf(value) !== -1
+                        }
+                    },
+                    // 必填的属性
+                    propD: {
+                        required: true
+                    },
+                    // 带有默认值的普通属性
+                    propE: {
+                        default: 'default'
+                    },
+                    // 对象或数组的默认值必须从一个工厂函数获取
+                    propF: {
+                        default: function () {
+                            return []
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

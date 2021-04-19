@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn></cpn>
+    <parent></parent>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>我是组件标题</h2>
+        <p>组件内容</p>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    // 1. 这里可以将 Vue 的实例 app 看作是 cpn 组件的父组件, 相对而言: cpn 组件就是 app 的子组件
+    // 2. 组件本质上都是继承自 Vue 的, 因此组件也可以拥有 components 等属性, 仅有的例外是像 el 这样的选项是根实例所特有的
+    // 3. 同理 parent 组件也是 son 组件的父组件
+    const app = new Vue({
+        el: '#app',
+        components: {
+            cpn: {
+                template: '#cpn'
+            },
+            parent: {
+                template: '#cpn',
+                components: {
+                    son: {
+                        template: '#cpn'
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

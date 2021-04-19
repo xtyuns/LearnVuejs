@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>message: {{message}}</h2>
+    <!-- 通过 v-on 来监听子组件发出的事件 -->
+    <cpn :msg="message" @message-change="messageModify"></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <!-- 这里也可以通过 v-model 和 watch 来完成 -->
+        <input type="text" :value="values" @input="inputChange">
+        <h2>values: {{values}}</h2>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    // 子组件通过 $emit 发出事件完成向父组件的数据传递
+    // $emit 官方文档: https://cn.vuejs.org/v2/guide/components-custom-events.html
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+        },
+        methods: {
+            // messageModify() 方法用于接收子组件发出的事件
+            messageModify(newValue) {
+                this.message = newValue
+            }
+        },
+        components: {
+            cpn: {
+                template: '#cpn',
+                // 父向子组件传递 message 的数据
+                props: ['msg'],
+                data() {
+                    return {
+                        // 不要直接修改 prop 属性, 而是通过一个本地 data 来完成
+                        values: this.msg
+                    }
+                },
+                methods: {
+                    inputChange(event) {
+                        this.values = event.target.value
+                        // 在 input 内容发生改变时, 发出一个 message-change 事件
+                        this.$emit('message-change', this.values)
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
