@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <a v-bind:[attr]="url">百度一下</a>
+    <!-- v-bind 的简写方式 -->
+    <a :[attr]="url">百度一下</a>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 从 2.6.0 开始，可以用方括号括起来的 JavaScript 表达式作为一个指令的参数(即: [attr])
+    const app = new Vue({
+        el: '#app',
+        data: {
+            attr: 'href',
+            url: 'https://www.baidu.com'
+        }
+    });
+</script>
+</body>
+</html>
