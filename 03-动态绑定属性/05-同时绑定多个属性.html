@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- v-bind=对象, 这里不能使用简写 -->
+    <h2 v-bind="props">{{message}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 将对象 props 中的所有属性都进行绑定
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, World',
+            props: {
+                class: 'active',
+                a: 'aaa',
+                b: 'bbb'
+            }
+        }
+    });
+</script>
+</body>
+</html>
