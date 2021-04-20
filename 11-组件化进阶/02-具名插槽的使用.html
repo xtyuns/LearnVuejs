@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn>
+        <!-- 默认只替换所有没有 name 属性的 slot -->
+        <span>标题</span>
+        <!-- 指定 slot 属性后, 只替换指定的插槽 -->
+        <span slot="center">app</span>
+    </cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <slot name="left">左边</slot>
+        <slot name="center">中间</slot>
+        <slot name="right">右边</slot>
+        <slot>默认</slot>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    // 当 slot 设置 name 属性后, 就可以替换指定的插槽了
+    const app = new Vue({
+        el: '#app',
+        components: {
+            cpn: {
+                template: '#cpn'
+            }
+        }
+    });
+</script>
+</body>
+</html>

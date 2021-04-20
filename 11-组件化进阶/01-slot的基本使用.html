@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn></cpn>
+    <!-- 组件中的每一个插槽都会被自定义组件中间的内容所替换 -->
+    <cpn>
+        <button>按钮1</button>
+        <button>按钮2</button>
+    </cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>我是组件标题</h2>
+        <p>组件内容</p>
+        <!-- 因为有两个slot 插槽, 所以组件中的内容会重复两次 -->
+        <slot></slot>
+        <slot>
+            <button>slot2默认按钮</button>
+        </slot>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    // slot 为自定义组件的插槽, 用于使用的过程中替换插槽中的内容
+    const app = new Vue({
+        el: '#app',
+        components: {
+            cpn: {
+                template: '#cpn'
+            }
+        }
+    });
+</script>
+</body>
+</html>
