@@ -1,0 +1,10 @@
+这里直接看官方文档就可以, 文档写的很详细
+webpack 中文文档: https://webpack.docschina.org/loaders/
+
+解析加载 css
+css-loader ^2.0.2
+style-loader ^0.23.1
+
+解析加载图片
+url-loader ^1.1.2
+file-loader ^3.0.1
